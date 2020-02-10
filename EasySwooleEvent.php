@@ -9,6 +9,7 @@
 namespace EasySwoole\EasySwoole;
 
 
+use App\Process\Consume;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -22,12 +23,23 @@ class EasySwooleEvent implements Event
     public static function initialize()
     {
         date_default_timezone_set('Asia/Shanghai');
+//redis连接池注册(config默认为127.0.0.1,端口6379)
+        \EasySwoole\RedisPool\Redis::getInstance()->register('redis', new \EasySwoole\Redis\Config\RedisConfig(
+            [
+                'host' => '127.0.0.1',
+                'port' => 6379,
+            ]
+        ));
+
     }
 
     public static function mainServerCreate(EventRegister $register)
     {
-        $config = new \EasySwoole\ORM\Db\Config(Config::getInstance()->getConf('MYSQL'));
-        DbManager::getInstance()->addConnection(new Connection($config));
+        $processConfig = new \EasySwoole\Component\Process\Config();
+        $processConfig->setProcessName('consume');
+        $processConfig->setEnableCoroutine(true);
+        ServerManager::getInstance()->getSwooleServer()->addProcess((new Consume($processConfig))->getProcess());
+
     }
 
     public static function onRequest(Request $request, Response $response): bool

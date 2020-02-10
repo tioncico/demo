@@ -21,17 +21,6 @@ return [
         ],
         'TASK'=>['workerNum'=>4,'maxRunningNum'=>128,'timeout'=>15]
     ],
-    'TEMP_DIR' => null,
+    'TEMP_DIR' => '/tmp',
     'LOG_DIR' => null,
-    'MYSQL'         => [
-        'host'          => '127.0.0.1',
-        'port'          => 3306,
-        'user'          => 'demo',
-        'password'      => '123456',
-        'database'      => 'demo',
-        'timeout'       => 5,
-        'charset'       => 'utf8mb4',
-        'POOL_MAX_NUM'  => 20,
-        'POOL_TIME_OUT' => 1
-    ],
 ];
