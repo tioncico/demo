@@ -1,12 +1,5 @@
-# EASYSWOOLE DEMO
-## 关于具体demo在哪
-demo/3.x分支对应了EasySwoole3.x版本的demo,3.x主要是easyswoole基础使用的例子，其他使用请看3.x对应的分支。
-
-## 如何运行DEMO
-
-安装项目时请不要覆盖默认的配置文件以及EasySwooleEvent事件注册文件
-
-
+## 项目介绍
+本demo启动了一个自定义消费进程,通过index控制器获取数据并插入队列,交给自定义消费进程处理
 
 
 ## 请先认真阅读手册 再进行体验
